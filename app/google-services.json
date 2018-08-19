@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "526445251998",
-    "firebase_url": "https://uberdriverapplication-9fd0c.firebaseio.com",
-    "project_id": "uberdriverapplication-9fd0c",
-    "storage_bucket": "uberdriverapplication-9fd0c.appspot.com"
+    "project_number": "208262563501",
+    "firebase_url": "https://uberriderapplication.firebaseio.com",
+    "project_id": "uberriderapplication",
+    "storage_bucket": "uberriderapplication.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:526445251998:android:9fad8ce39b6db621",
+        "mobilesdk_app_id": "1:208262563501:android:9fad8ce39b6db621",
         "android_client_info": {
           "package_name": "e.pavanmalisetti.uberdriverapplication"
         }
       },
       "oauth_client": [
         {
-          "client_id": "526445251998-769fgmgvn31c1n7punr1tnpolk58c5rs.apps.googleusercontent.com",
+          "client_id": "208262563501-lajs31176ipu0vbhn2rqa2ja3v4a8rdi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "e.pavanmalisetti.uberdriverapplication",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "526445251998-eujabpl631oipm8hafbtn3eis81s1gch.apps.googleusercontent.com",
+          "client_id": "208262563501-a4tfgcg30g2jsn144578erufilhh9jot.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCa4O1Q6q2pkmp_DUxGpTk2lCHLsp2Fw90"
+          "current_key": "AIzaSyB4yRnXUux-Bftkz5sxPNab92yH8KwA3q0"
         }
       ],
       "services": {
@@ -40,7 +40,51 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "526445251998-eujabpl631oipm8hafbtn3eis81s1gch.apps.googleusercontent.com",
+              "client_id": "208262563501-a4tfgcg30g2jsn144578erufilhh9jot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208262563501:android:bb73442fffdd75b1",
+        "android_client_info": {
+          "package_name": "e.pavanmalisetti.uberriderapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208262563501-okophlhgel3ppr4dgfmbfm0f550olo9l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "e.pavanmalisetti.uberriderapplication",
+            "certificate_hash": "7dc6af38eea2705cdb6bd93ff26987d55b44967d"
+          }
+        },
+        {
+          "client_id": "208262563501-a4tfgcg30g2jsn144578erufilhh9jot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4yRnXUux-Bftkz5sxPNab92yH8KwA3q0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208262563501-a4tfgcg30g2jsn144578erufilhh9jot.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
