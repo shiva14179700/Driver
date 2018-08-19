@@ -54,6 +54,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +63,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import e.pavanmalisetti.uberdriverapplication.Model.Token;
 import e.pavanmalisetti.uberdriverapplication.Remote.IGoogleAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -81,7 +83,6 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
 
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
-    private Location mLastLocation;
 
     private static int UPDATE_INTERVAL=5000;
     private static int FASTEST_INTERVAL=3000;
@@ -227,11 +228,23 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
         setUpLocation();
 
         mService= e.pavanmalisetti.uberdriverapplication.Common.Common.getGoogleAPI();
+
+        updateFirebaseToken();
+    }
+
+    private void updateFirebaseToken() {
+        FirebaseDatabase db=FirebaseDatabase.getInstance();
+        DatabaseReference tokens=db.getReference(Common.token_tbl);
+
+        Token token=new Token(FirebaseInstanceId.getInstance().getToken());
+        Toast.makeText(Welcome.this,"avan"+token.toString(),Toast.LENGTH_LONG).show();
+        tokens.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .setValue(token);
     }
 
     private void getDirection() {
 
-        currentPosition=new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+        currentPosition=new LatLng(Common.mLastLocation.getLatitude(),Common.mLastLocation.getLongitude());
 
         String requestApi=null;
         try{
@@ -453,14 +466,14 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
             return;
         }
 
-        mLastLocation=LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        Common.mLastLocation=LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-        if(mLastLocation!=null)
+        if(Common.mLastLocation!=null)
         {
             if(location_switch.isChecked())
             {
-                final double latitude=mLastLocation.getLatitude();
-                final double longitude= mLastLocation.getLongitude();
+                final double latitude=Common.mLastLocation.getLatitude();
+                final double longitude=Common.mLastLocation.getLongitude();
 
                 //Update to firebase
                 geoFire.setLocation(FirebaseAuth.getInstance().getCurrentUser().getUid(), new GeoLocation(latitude, longitude), new GeoFire.CompletionListener() {
@@ -545,7 +558,7 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onLocationChanged(Location location) {
-        mLastLocation=location;
+        Common.mLastLocation=location;
         displayLocation();
     }
 }
