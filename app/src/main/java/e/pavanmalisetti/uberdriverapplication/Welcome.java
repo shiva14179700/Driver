@@ -28,10 +28,13 @@ import com.github.glomadrian.materialanimatedswitch.MaterialAnimatedSwitch;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -92,19 +95,18 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
     MaterialAnimatedSwitch location_switch;
     SupportMapFragment mapFragment;
 
-    private List<LatLng> polyLineList;
-    private Marker carMarker;
-    private float v;
-    private double lat,lng;
-    private Handler handler;
-    private LatLng startPosition,endPosition,currentPosition;
-    private int index,next;
-    //private PlaceAutocompleteFragment places;
-    private Button btnGo;
-    private EditText edtPlace;
-    private String destination;
-    private PolylineOptions polylineOptions,blackPolylineOptions;
-    private Polyline blackPolyline,greyPolyline;
+   //Car Animation
+   private List<LatLng> polyLineList;
+   private Marker carMarker;
+   private float v;
+   private double lat,lng;
+   private Handler handler;
+   private LatLng startPosition,endPosition,currentPosition;
+   private int index,next;
+   private PlaceAutocompleteFragment places;
+   private String destination;
+   private PolylineOptions polylineOptions,blackPolylineOptions;
+   private Polyline blackPolyline,greyPolyline;
 
     private IGoogleAPI mService;
 
@@ -195,18 +197,26 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
             }
         });
 
-        polyLineList=new ArrayList<>();
-        btnGo=(Button)findViewById(R.id.btnGo);
-        edtPlace=(EditText)findViewById(R.id.edtPlace);
+        polyLineList =new ArrayList<>();
 
-        btnGo.setOnClickListener(new View.OnClickListener() {
+        //Places API
+        places=(PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        places.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onClick(View v) {
-                destination=edtPlace.getText().toString();
-                destination=destination.replace(" ","+");
-                Log.d("PAVAN",destination);
+            public void onPlaceSelected(Place place) {
+                if(location_switch.isChecked()){
+                    destination=place.getAddress().toString();
+                    destination=destination.replace(" ","+");
 
-                getDirection();
+                    getDirection();
+                }else{
+                    Toast.makeText(Welcome.this,"Please change your status to Online",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Status status) {
+                Toast.makeText(Welcome.this,""+status.toString(),Toast.LENGTH_SHORT).show();
             }
         });
 
