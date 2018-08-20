@@ -261,7 +261,7 @@ public class Welcome extends FragmentActivity implements OnMapReadyCallback,
         DatabaseReference tokens=db.getReference(Common.token_tbl);
 
         Token token=new Token(FirebaseInstanceId.getInstance().getToken());
-        Toast.makeText(Welcome.this,"avan"+token.toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(Welcome.this,"pavan"+token.toString(),Toast.LENGTH_LONG).show();
         tokens.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .setValue(token);
     }
